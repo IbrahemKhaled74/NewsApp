@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">NewsApp</string>
+    <string name="categories">Categories</string>
+    <string name="settings">settings</string>
+    <string name="open_drawer">open navigation drawer</string>
+    <string name="close_drawer">close navigation drawer</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="pick_your_category_of_interest">Pick your category of interest</string>
+    <string name="Sports">Sports</string>
+    <string name="Politics">Entertainment</string>
+    <string name="Health">Health</string>
+    <string name="business">Business</string>
+    <string name="Environment">Technology</string>
+    <string name="Science">Science</string>
+    <string name="view_full_article"><![CDATA[View Full Article |>]]></string>
+    <string name="search">search</string>
+    <string name="news_app">News App</string>
+    <string name="arabic">Arabic</string>
+
+</resources>
