@@ -9,7 +9,6 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.newsapp.NewsDetails
 import com.example.newsapp.R
 import com.example.newsapp.apiResponses.ArticlesItem
 import com.example.newsapp.apiResponses.SourcesItem

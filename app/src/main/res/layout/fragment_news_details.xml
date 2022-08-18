@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@mipmap/main_bacground"
         android:theme="@style/Theme.Design.NoActionBar"
-        tools:context=".NewsDetails">
+        tools:context=".News.NewsDetails">
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/image_details"

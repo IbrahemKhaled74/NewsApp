@@ -1,4 +1,4 @@
-package com.example.newsapp
+package com.example.newsapp.News
 
 import android.content.Intent
 import android.net.Uri
@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
-import com.example.newsapp.News.News
+import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentNewsDetailsBinding
 
 class NewsDetails : Fragment() {
