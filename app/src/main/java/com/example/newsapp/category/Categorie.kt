@@ -4,49 +4,51 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.R
+import com.example.newsapp.databinding.FragmentCategorieBinding
 
 class Categorie : Fragment() {
     val item = listOf(
-        category_item("sports", R.string.Sports, R.drawable.sport, R.color.red),
-        category_item(
+        Category_item("sports", R.string.Sports, R.drawable.sport, R.color.red),
+        Category_item(
             "entertainment",
             R.string.Politics,
             R.drawable.entertainment,
             R.color.darkBlue
         ),
-        category_item("health", R.string.Health, R.drawable.health, R.color.pink),
-        category_item("business", R.string.business, R.drawable.bussines, R.color.brown),
-        category_item("technology", R.string.Environment, R.drawable.technology, R.color.babyBlue),
-        category_item("science", R.string.Science, R.drawable.science, R.color.yellow),
-
-        )
-    lateinit var recyclerView: RecyclerView
+        Category_item("health", R.string.Health, R.drawable.health, R.color.pink),
+        Category_item("business", R.string.business, R.drawable.bussines, R.color.brown),
+        Category_item("technology", R.string.Environment, R.drawable.technology, R.color.babyBlue),
+        Category_item("science", R.string.Science, R.drawable.science, R.color.yellow),
+    )
     lateinit var categoryAdaptor: categoryAdaptor
-    lateinit var searchView: androidx.appcompat.widget.SearchView
-
-
+    lateinit var categoryDataBinding: FragmentCategorieBinding
+    lateinit var searchView: SearchView
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        categoryDataBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_categorie, container, false)
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_categorie, container, false)
+
+        return categoryDataBinding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView = view.findViewById(R.id.category_RV)
         categoryAdaptor = categoryAdaptor(item)
-        recyclerView.adapter = categoryAdaptor
+        categoryDataBinding.categoryRV.adapter = categoryAdaptor
+
         searchView = requireActivity().findViewById(R.id.searchView)
         searchView.isVisible = false
 
         categoryAdaptor.onCategoryClickListener = object : categoryAdaptor.OnItemClickListener {
-            override fun onCategoryClick(position: Int, categorie: category_item) {
+            override fun onCategoryClick(position: Int, categorie: Category_item) {
 //           onCategory.let {
 //               onCategoryClicked ->
 //               onCategoryClicked?.onCategoryClicke(categorie)
@@ -61,7 +63,7 @@ class Categorie : Fragment() {
     var onCategory: onCategoryClicked? = null
 
     interface onCategoryClicked {
-        fun onCategoryClicke(category: category_item)
+        fun onCategoryClicke(category: Category_item)
     }
 
 }

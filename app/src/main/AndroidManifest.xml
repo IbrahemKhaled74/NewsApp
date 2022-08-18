@@ -12,6 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.NewsApp">
         <activity
+            android:name=".catogry_right_item"
+            android:exported="false" />
+        <activity
             android:name=".SplashScreen"
             android:exported="true"
             android:theme="@style/SplashTheme">
@@ -22,7 +25,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeActivity"
+            android:name=".Home.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.NewsApp" />
     </application>
