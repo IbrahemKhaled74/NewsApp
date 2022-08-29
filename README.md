@@ -1,5 +1,8 @@
 # News App
 
+Please ⭐️ this repo and share it with others
+
+
 # Description
 News app With Kotlin . Live News App with many Categories like Politics,Sports...Etc and U can use the source u want like BBC-news , Fox-Sports...Etc.
 
