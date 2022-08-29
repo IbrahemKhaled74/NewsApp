@@ -1,6 +1,6 @@
 # News App
 
-Please ⭐️ this repo and share it with others
+Please ⭐️ this repo and share it with others.
 
 
 # Description
