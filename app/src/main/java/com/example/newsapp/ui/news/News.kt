@@ -1,4 +1,4 @@
-package com.example.newsapp.News
+package com.example.newsapp.ui.news
 
 import android.os.Bundle
 import android.view.*
@@ -10,16 +10,28 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.newsapp.R
-import com.example.newsapp.apiResponses.ArticlesItem
-import com.example.newsapp.apiResponses.SourcesItem
-import com.example.newsapp.category.Category_item
 import com.example.newsapp.databinding.NewsFragmentBinding
+import com.example.newsapp.ui.category.Category_item
 import com.google.android.material.tabs.TabLayout
+import dagger.hilt.android.AndroidEntryPoint
+import domain.models.ArticlesItemDTO
+import domain.models.SourcesItemDTO
+import javax.inject.Inject
 
-
+@AndroidEntryPoint
 class News : Fragment() {
+    @Inject
     lateinit var newsAdaptor: newsAdaptor
+
+    @Inject
+    lateinit var newsDetails: NewsDetails
     lateinit var categorie: Category_item
+    var source: SourcesItemDTO? = null
+    lateinit var newsViewModel: NewsViewModel
+    lateinit var newsDataBinding: NewsFragmentBinding
+    lateinit var searchView: androidx.appcompat.widget.SearchView
+    lateinit var AppName: TextView
+
 
     companion object {
         fun getInstance(categorie: Category_item): News {
@@ -28,21 +40,16 @@ class News : Fragment() {
             return fragment
         }
 
-        var items: ArticlesItem? = null
+        var items: ArticlesItemDTO? = null
 
     }
 
-    var source: SourcesItem? = null
-    lateinit var newsViewModel: NewsViewModel
-    lateinit var newsDataBinding: NewsFragmentBinding
-    lateinit var searchView: androidx.appcompat.widget.SearchView
-    lateinit var AppName: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         newsDataBinding =
             DataBindingUtil.inflate(inflater, R.layout.news_fragment, container, false)
 
@@ -65,6 +72,7 @@ class News : Fragment() {
 
     private fun subscribeData() {
         newsViewModel.getNewsSources(categorie)
+
         newsViewModel.progressBar.observe(viewLifecycleOwner, {
             newsDataBinding.progressBar.isVisible = it
         })
@@ -83,15 +91,14 @@ class News : Fragment() {
 
 
     private fun initView() {
-        newsAdaptor = newsAdaptor(null)
         newsDataBinding.newsRecycle.adapter = newsAdaptor
         searchView = requireActivity().findViewById(R.id.searchView)
         AppName = requireActivity().findViewById(R.id.AppName)
         newsAdaptor.onItemSelectedListener = object : newsAdaptor.OnItemSelectedListener {
-            override fun onNewsClick(newsItem: ArticlesItem?) {
+            override fun onNewsClick(newsItem: ArticlesItemDTO?) {
                 items = newsItem
                 activity?.supportFragmentManager?.beginTransaction()
-                    ?.replace(R.id.fragment_Container, NewsDetails())
+                    ?.replace(R.id.fragment_Container, newsDetails)
                     ?.addToBackStack("")
                     ?.commit()
             }
@@ -123,7 +130,7 @@ class News : Fragment() {
 
     }
 
-    private fun showNews(newsItem: List<ArticlesItem?>?) {
+    private fun showNews(newsItem: List<ArticlesItemDTO?>?) {
         newsAdaptor.changeData(newsItem)
     }
 
@@ -132,7 +139,7 @@ class News : Fragment() {
         newsDataBinding.tabLayout.addOnTabSelectedListener(
             object : TabLayout.OnTabSelectedListener {
                 override fun onTabSelected(tab: TabLayout.Tab?) {
-                    source = tab?.tag as SourcesItem
+                    source = tab?.tag as SourcesItemDTO
                     newsViewModel.getNews(source, "")
                 }
 
@@ -150,7 +157,7 @@ class News : Fragment() {
     }
 
     // add tab in tab Layout
-    private fun addSourceTab(sources: List<SourcesItem?>?) {
+    private fun addSourceTab(sources: List<SourcesItemDTO?>?) {
         sources?.forEach { source ->
             val tab = newsDataBinding.tabLayout.newTab()
             tab.text = source?.name

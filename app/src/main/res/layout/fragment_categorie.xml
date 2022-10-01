@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:background="@mipmap/main_bacground"
         android:theme="@style/Theme.NewsApp"
-        tools:context=".category.Categorie">
+        tools:context=".ui.category.Categorie">
 
         <TextView
             android:id="@+id/pick_catog"

@@ -1,4 +1,4 @@
-package com.example.newsapp.News
+package com.example.newsapp.ui.news
 
 import android.content.Intent
 import android.net.Uri

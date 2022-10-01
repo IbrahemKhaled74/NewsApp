@@ -7,7 +7,7 @@
 
         <variable
             name="item"
-            type="com.example.newsapp.apiResponses.ArticlesItem" />
+            type="domain.models.ArticlesItemDTO" />
 
     </data>
 

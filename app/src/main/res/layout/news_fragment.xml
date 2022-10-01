@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@mipmap/main_bacground"
-        tools:context=".Home.HomeActivity">
+        tools:context=".ui.home.HomeActivity">
 
         <com.google.android.material.tabs.TabLayout
             android:id="@+id/tabLayout"

@@ -1,16 +1,16 @@
-package com.example.newsapp.News
+package com.example.newsapp.ui.news
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.newsapp.R
-import com.example.newsapp.apiResponses.ArticlesItem
 import com.example.newsapp.databinding.NewsItemBinding
+import domain.models.ArticlesItemDTO
 
-class newsAdaptor(var newsItem: List<ArticlesItem?>?) :
+class newsAdaptor(var newsItem: List<ArticlesItemDTO?>?) :
     RecyclerView.Adapter<newsAdaptor.viewModel>() {
-    fun changeData(newsItem: List<ArticlesItem?>?) {
+    fun changeData(newsItem: List<ArticlesItemDTO?>?) {
         this.newsItem = newsItem
         notifyDataSetChanged()
     }
@@ -39,11 +39,11 @@ class newsAdaptor(var newsItem: List<ArticlesItem?>?) :
     var onItemSelectedListener: OnItemSelectedListener? = null
 
     interface OnItemSelectedListener {
-        fun onNewsClick(newsItem: ArticlesItem?)
+        fun onNewsClick(newsItem: ArticlesItemDTO?)
     }
 
     class viewModel(val newsItem: NewsItemBinding) : RecyclerView.ViewHolder(newsItem.root) {
-        fun bindView(item: ArticlesItem?) {
+        fun bindView(item: ArticlesItemDTO?) {
             newsItem.item = item
             newsItem.executePendingBindings()
         }

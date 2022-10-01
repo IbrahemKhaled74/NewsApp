@@ -1,4 +1,4 @@
-package com.example.newsapp.category
+package com.example.newsapp.ui.category
 
 
 data class Category_item(

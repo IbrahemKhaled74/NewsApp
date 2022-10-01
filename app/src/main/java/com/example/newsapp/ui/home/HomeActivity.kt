@@ -1,4 +1,4 @@
-package com.example.newsapp.Home
+package com.example.newsapp.ui.home
 
 import android.os.Build
 import android.os.Bundle
@@ -7,12 +7,14 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import com.example.newsapp.News.News
 import com.example.newsapp.R
-import com.example.newsapp.category.Categorie
-import com.example.newsapp.category.Category_item
 import com.example.newsapp.databinding.ActivityHomeBinding
+import com.example.newsapp.ui.category.Categorie
+import com.example.newsapp.ui.category.Category_item
+import com.example.newsapp.ui.news.News
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
     var category = Categorie()
     lateinit var homeBinding: ActivityHomeBinding

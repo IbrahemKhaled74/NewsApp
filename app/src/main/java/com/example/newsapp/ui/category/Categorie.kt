@@ -1,4 +1,4 @@
-package com.example.newsapp.category
+package com.example.newsapp.ui.category
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +10,10 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.newsapp.R
 import com.example.newsapp.databinding.FragmentCategorieBinding
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class Categorie : Fragment() {
     val item = listOf(
         Category_item("sports", R.string.Sports, R.drawable.sport, R.color.red),
@@ -25,6 +28,8 @@ class Categorie : Fragment() {
         Category_item("technology", R.string.Environment, R.drawable.technology, R.color.babyBlue),
         Category_item("science", R.string.Science, R.drawable.science, R.color.yellow),
     )
+
+    @Inject
     lateinit var categoryAdaptor: categoryAdaptor
     lateinit var categoryDataBinding: FragmentCategorieBinding
     lateinit var searchView: SearchView
@@ -41,7 +46,7 @@ class Categorie : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        categoryAdaptor = categoryAdaptor(item)
+        categoryAdaptor.changeData(item)
         categoryDataBinding.categoryRV.adapter = categoryAdaptor
 
         searchView = requireActivity().findViewById(R.id.searchView)

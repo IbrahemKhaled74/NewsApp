@@ -1,4 +1,4 @@
-package com.example.newsapp.category
+package com.example.newsapp.ui.category
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,10 +9,15 @@ import com.example.newsapp.R
 import com.example.newsapp.databinding.ActivityCatogryRightItemBinding
 import com.example.newsapp.databinding.CatogryLeftItemBinding
 
-class categoryAdaptor(val category: List<Category_item>) :
+class categoryAdaptor(var category: List<Category_item>?) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     val categoryLeft = 10
     val categoryRight = 20
+    fun changeData(category: List<Category_item>?) {
+        this.category = category
+
+    }
+
     override fun getItemViewType(position: Int): Int {
         return if (position % 2 == 0) categoryLeft else categoryRight
     }
@@ -37,7 +42,7 @@ class categoryAdaptor(val category: List<Category_item>) :
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = category[position]
+        val item = category?.get(position)
         if (holder is rightViewHolder) {
             holder.bindView(item, holder)
         } else if (holder is LeftViewHolder) {
@@ -45,14 +50,14 @@ class categoryAdaptor(val category: List<Category_item>) :
         }
         onCategoryClickListener.let { onItemClickListener ->
             holder.itemView.setOnClickListener {
-                onItemClickListener?.onCategoryClick(position, item)
+                onItemClickListener?.onCategoryClick(position, item!!)
             }
         }
 
     }
 
 
-    override fun getItemCount(): Int = category.size
+    override fun getItemCount(): Int = category?.size ?: 0
     var onCategoryClickListener: OnItemClickListener? = null
 
     interface OnItemClickListener {
